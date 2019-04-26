@@ -156,6 +156,8 @@ namespace TowerDefense.UI
 			endGameCanvas.enabled = true;
 
 			int score = CalculateFinalScore();
+			//TODO: Add Posting to Leaderboard
+			
 			scorePanel.SetStars(score);
 			if (level != null) 
 			{

@@ -96,6 +96,28 @@ namespace TowerDefense.Game
             }
         }
         
+        public string PostToLeaderboard(int score)
+        {
+            if (Authenticated && score > mHighestPostedScore)
+            {
+                // post score to the leaderboard
+                Social.ReportScore(score, GPGSIds.leaderboard_test, (bool success) =>
+                    {
+                    });
+                mHighestPostedScore = score;
+                return "success, Reported Score: " + score;
+            }
+            else
+            {
+                Debug.LogWarning("Not reporting score, auth = " + Authenticated + " " +
+                    score + " <= " + mHighestPostedScore);
+                return "Not reporting score, auth = " + Authenticated + " " +
+                       score + " <= " + mHighestPostedScore;
+            }
+        }
+
+        
+        
         public void ShowAchievementsUI()
         {
 	        if (Authenticated)

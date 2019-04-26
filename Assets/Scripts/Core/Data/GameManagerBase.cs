@@ -191,7 +191,7 @@ namespace Core.Data
 			PlayGamesPlatform.Activate();
 
 			// Set the default leaderboard for the leaderboards UI
-			((PlayGamesPlatform)Social.Active).SetDefaultLeaderboardForUI(GPGSIds.leaderboard_test);
+			((PlayGamesPlatform)Social.Active).SetDefaultLeaderboardForUI(GPGSIds.leaderboard_level1);
 
 			// Sign in to Google Play Games
 			mAuthenticating = true;

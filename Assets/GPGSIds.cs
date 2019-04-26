@@ -24,6 +24,8 @@
 
 public static class GPGSIds
 {
+        public const string achievement_first_blood = "CgkIqeeDqI8EEAIQBg"; // <GPGSID>
+        public const string leaderboard_level1 = "CgkIqeeDqI8EEAIQBQ"; // <GPGSID>
         public const string leaderboard_test = "CgkIqeeDqI8EEAIQAA"; // <GPGSID>
 
 }

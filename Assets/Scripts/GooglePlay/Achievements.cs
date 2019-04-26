@@ -55,7 +55,7 @@ public void AddScoreToLeaderBoard(long my_score)
     {
         if (Social.localUser.authenticated)
         {
-            Social.ReportScore(1234, GPGSIds.leaderboard_test, (bool success) =>
+            Social.ReportScore(1234, GPGSIds.leaderboard_level1, (bool success) =>
             {
                 Debug.Log(success ? "Update Score Success" : "Update Score Fail");
             });

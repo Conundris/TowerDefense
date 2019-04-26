@@ -30,6 +30,7 @@ namespace TowerDefense.UI.HUD
 		public Text textBox;
 		public Text debugBannerAdTextBox;
 		public Text debugInterstitalAdTextBox;
+		public Text debugLeaderBoardTextBox;
 		public Text rewardedAdTextBox;
 		
 		public BannerView bannerView;
@@ -80,7 +81,17 @@ namespace TowerDefense.UI.HUD
 		{
 			GameManager.instance.ShowAchievementsUI();
 		}
+		
+		public void DebugLeaderBoardPost()
+		{
+			debugLeaderBoardTextBox.text = GameManager.instance.PostToLeaderboard(3);
+		}
 
+		public void UnlockAchievement()
+		{
+			
+		}
+		
 		/*private void InitAdMob()
 		{
 #if UNITY_ANDROID
