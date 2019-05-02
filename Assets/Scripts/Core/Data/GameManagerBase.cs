@@ -16,11 +16,6 @@ namespace Core.Data
 		where TDataStore : GameDataStoreBase, new()
 		where TGameManager : GameManagerBase<TGameManager, TDataStore>
 	{
-		public BannerView bannerView;
-		public InterstitialAd interstitial;
-		private float deltaTime = 0.0f;
-		private static string outputMessage = string.Empty;
-		
 		/// <summary>
 		/// File name of saved game
 		/// </summary>
@@ -56,18 +51,18 @@ namespace Core.Data
 		/// </summary>
 		protected TDataStore m_DataStore;
 
-		public bool mAuthenticating = false;
-		
 		// list of achievements we know we have unlocked (to avoid making repeated calls to the API)
 		protected Dictionary<string,bool> mUnlockedAchievements = new Dictionary<string, bool>();
 
 		// achievement increments we are accumulating locally, waiting to send to the games API
 		protected Dictionary<string,int> mPendingIncrements = new Dictionary<string, int>();
 		
-		// what is the highest score we have posted to the leaderboard?
-		protected int mHighestPostedScore = 0;
+		public bool mAuthenticating = false;
 		
-		public RewardBasedVideoAd rewardBasedVideo { get; private set; }
+		// what is the highest score we have posted to the leaderboard?
+		public int mHighestPostedScore = 0;
+		
+		public RewardBasedVideoAd rewardBasedVideo { get; set; }
 		
 		public bool Authenticated
 		{
@@ -137,38 +132,9 @@ namespace Core.Data
 		protected virtual void Start()
 		{
 			SetVolumes(m_DataStore.masterVolume, m_DataStore.sfxVolume, m_DataStore.musicVolume, false);
-			InitAdMob();
-			Authenticate();
+			//Authenticate();
 		}
-
-		private void InitAdMob()
-		{
-			#if UNITY_ANDROID
-                    string appId = AdMobIds.app_ID;
-            #elif UNITY_IPHONE
-                    string appId = "ca-app-pub-3940256099942544~1458002511";
-            #else
-                    string appId = "unexpected_platform";
-            #endif
-            
-                    MobileAds.SetiOSAppPauseOnBackground(true);
-            
-                    // Initialize the Google Mobile Ads SDK.
-                    MobileAds.Initialize(appId);
-            
-                    // Get singleton reward based video ad reference.
-                    this.rewardBasedVideo = RewardBasedVideoAd.Instance;
-                    
-                    // RewardBasedVideoAd is a singleton, so handlers should only be registered once.
-                    /*this.rewardBasedVideo.OnAdLoaded += this.HandleRewardBasedVideoLoaded;
-                    this.rewardBasedVideo.OnAdFailedToLoad += this.HandleRewardBasedVideoFailedToLoad;
-                    this.rewardBasedVideo.OnAdOpening += this.HandleRewardBasedVideoOpened;
-                    this.rewardBasedVideo.OnAdStarted += this.HandleRewardBasedVideoStarted;
-                    this.rewardBasedVideo.OnAdRewarded += this.HandleRewardBasedVideoRewarded;
-                    this.rewardBasedVideo.OnAdClosed += this.HandleRewardBasedVideoClosed;
-                    this.rewardBasedVideo.OnAdLeavingApplication += this.HandleRewardBasedVideoLeftApplication;*/
-		}
-
+		
 		public void Authenticate()
 		{
 			if (Authenticated || mAuthenticating)

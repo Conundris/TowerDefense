@@ -29,6 +29,7 @@ namespace Core.UI
 		{
 			DeactivateCurrentPage();
 			ActivateCurrentPage(newPage);
+			
 		}
 
 		/// <summary>

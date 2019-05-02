@@ -27,6 +27,9 @@ namespace TowerDefense.UI.HUD
 		protected virtual void Start()
 		{
 			LevelManager levelManager = LevelManager.instance;
+			
+			//levelManager.
+			
 			if (levelManager == null)
 			{
 				return;

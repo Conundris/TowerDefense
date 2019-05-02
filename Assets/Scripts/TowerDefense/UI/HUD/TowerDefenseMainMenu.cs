@@ -1,6 +1,7 @@
 using System;
 using Core.UI;
 using GoogleMobileAds.Api;
+using GooglePlayGames;
 using TowerDefense.Game;
 using UnityEngine;
 using UnityEngine.UI;
@@ -72,6 +73,27 @@ namespace TowerDefense.UI.HUD
 			RequestInterstitial();
 		}
 
+		private void OnEnable()
+		{
+			Debug.LogWarning("Calling OnEnable");
+		}
+
+		private void Start()
+		{
+			Debug.LogWarning("Calling Start.");
+		}
+
+		private void OnDestroy()
+		{
+			Debug.LogWarning("Calling OnDestory");
+			bannerView.Destroy();
+		}
+
+		private void OnDisable()
+		{
+			Debug.LogWarning("Calling OnDisable");
+		}
+
 		public void ShowLeaderBoard()
 		{
 			GameManager.instance.ShowLeaderboardUI();
@@ -84,12 +106,22 @@ namespace TowerDefense.UI.HUD
 		
 		public void DebugLeaderBoardPost()
 		{
-			debugLeaderBoardTextBox.text = GameManager.instance.PostToLeaderboard(3);
+			debugLeaderBoardTextBox.text = GameManager.instance.PostToLeaderboard(3 + GameManager.instance.mHighestPostedScore);
 		}
 
 		public void UnlockAchievement()
 		{
-			
+			GameManager.instance.UnlockAchievement(GPGSIds.achievement_first_blood);
+		}
+		
+		public void SignOut()
+		{
+			((PlayGamesPlatform)Social.Active).SignOut();
+		}
+
+		public void SignIn()
+		{
+			GameManager.instance.Authenticate();
 		}
 		
 		/*private void InitAdMob()
@@ -222,7 +254,7 @@ namespace TowerDefense.UI.HUD
 		
 		public void DisplayRewardedAd()
 		{
-			GameManager.instance.ShowBannerAd();
+			GameManager.instance.ShowRewardBasedVideo();
 		}
 		
 		/// <summary>
@@ -356,5 +388,7 @@ namespace TowerDefense.UI.HUD
     }
 
     #endregion
+    
+    
 	}
 }

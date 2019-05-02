@@ -2,7 +2,9 @@
 using Core.Economy;
 using Core.Health;
 using Core.Utilities;
+using GoogleMobileAds.Api;
 using TowerDefense.Economy;
+using TowerDefense.Game;
 using TowerDefense.Towers.Data;
 using UnityEngine;
 
@@ -56,6 +58,11 @@ namespace TowerDefense.Level
 		/// Number of enemies currently in the level
 		/// </summary>
 		public int numberOfEnemies { get; protected set; }
+		
+		/// <summary>
+		/// Number of enemies killed
+		/// </summary>
+		public int numberOfEnemiesKilled { get; protected set; }
 
 		/// <summary>
 		/// The current state of the level
@@ -118,6 +125,8 @@ namespace TowerDefense.Level
 		/// </summary>
 		public event Action homeBaseDestroyed;
 
+		private RewardBasedVideoAd rewardedAd;
+		
 		/// <summary>
 		/// Increments the number of enemies. Called on Agent spawn
 		/// </summary>
@@ -147,6 +156,7 @@ namespace TowerDefense.Level
 		{
 			numberOfEnemies--;
 			SafelyCallNumberOfEnemiesChanged();
+			GameManager.instance.IncrementAchievement(GPGSIds.achievement_rampage, 1);
 			if (numberOfEnemies < 0)
 			{
 				Debug.LogError("[LEVEL] There should never be a negative number of enemies. Something broke!");
@@ -266,6 +276,8 @@ namespace TowerDefense.Level
 				return;
 			}
 
+			GameManager.instance.ReportAllProgress();
+			
 			LevelState oldState = levelState;
 			levelState = newState;
 			if (levelStateChanged != null)
@@ -347,5 +359,8 @@ namespace TowerDefense.Level
 				levelFailed();
 			}
 		}
+		
+		
+		
 	}
 }

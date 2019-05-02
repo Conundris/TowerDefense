@@ -1,5 +1,9 @@
-﻿using TowerDefense.Level;
+﻿using System;
+using GoogleMobileAds.Api;
+using TowerDefense.Game;
+using TowerDefense.Level;
 using TowerDefense.Towers;
+//using UnityEditor.Purchasing;
 using UnityEngine;
 
 namespace TowerDefense.UI.HUD
@@ -13,6 +17,8 @@ namespace TowerDefense.UI.HUD
 		/// The prefab spawned for each button
 		/// </summary>
 		public TowerSpawnButton towerSpawnButton;
+
+
 
 		/// <summary>
 		/// Initialize the tower spawn buttons
@@ -93,6 +99,11 @@ namespace TowerDefense.UI.HUD
 			{
 				LevelManager.instance.currency.AddCurrency(amount);
 			}
+		}
+
+		public void ShowRewardedAd()
+		{
+			GameManager.instance.ShowRewardBasedVideo();
 		}
 	}
 }
