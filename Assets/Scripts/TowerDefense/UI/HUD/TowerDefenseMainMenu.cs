@@ -262,18 +262,16 @@ namespace TowerDefense.UI.HUD
 		/// </summary>
 		protected virtual void Update()
 		{
-			textBox.text = GameManager.instance.Authenticated ? "Authenticated BITCH" : "Dumbass. Feck off";
-			
-			if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
+			textBox.text = GameManager.instance.Authenticated ? "Authenticated" : "Broken AF";
+
+			if (!UnityEngine.Input.GetKeyDown(KeyCode.Escape)) return;
+			if ((SimpleMainMenuPage)m_CurrentPage == titleMenu)
 			{
-				if ((SimpleMainMenuPage)m_CurrentPage == titleMenu)
-				{
-					Application.Quit();
-				}
-				else
-				{
-					Back();
-				}
+				Application.Quit();
+			}
+			else
+			{
+				Back();
 			}
 		}
 		
